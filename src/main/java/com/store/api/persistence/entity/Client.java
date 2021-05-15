@@ -1,14 +1,17 @@
 package com.store.api.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.*;
 
 @Entity
 @Table(name = "client")
-public class Client {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Client implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,8 +26,8 @@ public class Client {
     @Column(name = "phone_number")
     private Long phoneNumber;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL) // 'client' variable name on class Purchase
-    List<Purchase> purchases = new LinkedList<Purchase>();
+    @OneToMany(mappedBy = "client") // 'client' variable name on class Purchase
+    List<Purchase> purchases;
 
     public Client() {
     }

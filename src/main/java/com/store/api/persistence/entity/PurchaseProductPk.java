@@ -1,8 +1,10 @@
 package com.store.api.persistence.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@Embeddable
 public class PurchaseProductPk implements Serializable {
     @Column(name = "id_purchase")
     private Integer idPurchase;
